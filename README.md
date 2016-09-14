@@ -1,2 +1,2 @@
 # lnmp
-lnmp(CentOS + Nginx + MariaDB + PHP) is config of my development environment
+A shell of lnmp(CentOS + Nginx + MariaDB + PHP) for my development environment.
