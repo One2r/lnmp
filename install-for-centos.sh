@@ -7,10 +7,10 @@ export PATH
 echo 'LANG="en_US.UTF-8"' > /etc/sysconfig/i18n
 
 ###设置dns
-cat >>/etc/resolv.conf<<eof
-nameserver 222.246.129.80
-nameserver 59.51.78.210
-eof
+#cat >>/etc/resolv.conf<<eof
+#nameserver 222.246.129.80
+#nameserver 59.51.78.210
+#eof
 
 ###设置时区
 rm -rf /etc/localtime
