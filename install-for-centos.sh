@@ -101,6 +101,7 @@ fi
 
 ldconfig
 
+#内核参数调整
 cat >>/etc/security/limits.conf<<eof
 * soft nproc 65535
 * hard nproc 65535
@@ -108,7 +109,6 @@ cat >>/etc/security/limits.conf<<eof
 * hard nofile 65535
 eof
 
-#内核参数调整
 cat >>/etc/sysctl.conf<<eof
 fs.file-max=65535
 eof
@@ -128,14 +128,17 @@ yum -y remove php-mysql
 yum -y remove httpd
 
 echo "============================2.安装lnmp=================================="
+PHP_VERSION=5.6.25
+NGINX_VERSION=1.10.1
+MARIADB_VERSION=10.0
 
 echo "==========MariaDB=========="
 cat >>/etc/yum.repos.d/MariaDB.repo<<eof
-# MariaDB 10.0 CentOS repository list - created 2013-08-23 13:08 UTC 
+# MariaDB ${MARIADB_VERSION} CentOS repository list - created $(date)
 # http://mariadb.org/mariadb/repositories/ 
 [mariadb] 
 name = MariaDB 
-baseurl = http://yum.mariadb.org/10.0/centos6-amd64 
+baseurl = http://yum.mariadb.org/${MARIADB_VERSION}/centos6-amd64 
 gpgkey=https://yum.mariadb.org/RPM-GPG-KEY-MariaDB 
 gpgcheck=1
 eof
@@ -152,11 +155,11 @@ echo "==========MariaDB install completed=========="
 
 echo "==========PHP=========="
 
-tar zxvf php-5.6.25.tar.gz
-cd php-5.6.25/
+tar zxvf php-${PHP_VERSION}.tar.gz
+cd php-${PHP_VERSION}/
 ./configure  \
---prefix=/usr/local/php-5.6.25 \
---with-config-file-path=/usr/local/php-5.6.25/etc \
+--prefix=/usr/local/php-${PHP_VERSION} \
+--with-config-file-path=/usr/local/php-${PHP_VERSION}/etc \
 --enable-fpm \
 --with-mysql=mysqlnd \
 --with-mysqli=mysqlnd \
@@ -199,27 +202,27 @@ rm -f /usr/bin/php
 rm -f /usr/bin/phpize
 rm -f /usr/bin/php-config
 
-ln -s /usr/local/php-5.6.25 /usr/local/php	
+ln -s /usr/local/php-${PHP_VERSION} /usr/local/php
 ln -s /usr/local/php/bin/php /usr/bin/php
 ln -s /usr/local/php/bin/phpize /usr/bin/phpize
 ln -s /usr/local/php/bin/php-config /usr/bin/php-config
 
-mkdir -p /usr/local/php-5.6.25/etc
-cp php.ini-production /usr/local/php-5.6.25/etc/php.ini
-mv /usr/local/php-5.6.25/etc/php-fpm.conf.default /usr/local/php-5.6.25/etc/php-fpm.conf
+mkdir -p /usr/local/php-${PHP_VERSION}/etc
+cp php.ini-production /usr/local/php-${PHP_VERSION}/etc/php.ini
+mv /usr/local/php-${PHP_VERSION}/etc/php-fpm.conf.default /usr/local/php-${PHP_VERSION}/etc/php-fpm.conf
 
 cd ..
 
 echo "==========PHP install completed=========="
 
 echo "==========Nginx=========="
-tar zxvf nginx-1.10.1.tar.gz
-cd nginx-1.10.1/
-./configure --prefix=/usr/local/nginx-1.10.1
+tar zxvf nginx-${NGINX_VERSION}.tar.gz
+cd nginx-${NGINX_VERSION}/
+./configure --prefix=/usr/local/nginx-${NGINX_VERSION}
 
 make && make install
 rm -f /usr/bin/nginx
-ln -s /usr/local/nginx-1.10.1 /usr/local/nginx
+ln -s /usr/local/nginx-${NGINX_VERSION} /usr/local/nginx
 ln -s /usr/local/nginx/sbin/nginx /usr/bin/nginx
 
 cd .. 
