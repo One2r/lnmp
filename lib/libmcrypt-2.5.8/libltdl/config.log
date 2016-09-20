@@ -1,0 +1,256 @@
+This file contains any messages produced by compilers while
+running configure, to aid debugging if configure makes a mistake.
+
+configure:773: checking for a BSD compatible install
+configure:826: checking whether build environment is sane
+configure:883: checking whether make sets ${MAKE}
+configure:922: checking for working aclocal
+configure:935: checking for working autoconf
+configure:948: checking for working automake
+configure:961: checking for working autoheader
+configure:974: checking for working makeinfo
+configure:991: checking whether to enable maintainer-specific portions of Makefiles
+configure:1017: checking for gcc
+configure:1130: checking whether the C compiler (gcc  ) works
+configure:1146: gcc -o conftest    conftest.c  1>&5
+configure:1172: checking whether the C compiler (gcc  ) is a cross-compiler
+configure:1177: checking whether we are using GNU C
+configure:1186: gcc -E conftest.c
+configure:1205: checking whether gcc accepts -g
+configure:1237: checking for working const
+configure:1291: gcc -c -g -O2  conftest.c 1>&5
+configure:1312: checking for inline
+configure:1326: gcc -c -g -O2  conftest.c 1>&5
+configure:1365: checking for Cygwin environment
+configure:1381: gcc -c -g -O2  conftest.c 1>&5
+configure: In function 'main':
+configure:1377: error: '__CYGWIN32__' undeclared (first use in this function)
+configure:1377: error: (Each undeclared identifier is reported only once
+configure:1377: error: for each function it appears in.)
+configure: failed program was:
+#line 1370 "configure"
+#include "confdefs.h"
+
+int main() {
+
+#ifndef __CYGWIN__
+#define __CYGWIN__ __CYGWIN32__
+#endif
+return __CYGWIN__;
+; return 0; }
+configure:1398: checking for mingw32 environment
+configure:1410: gcc -c -g -O2  conftest.c 1>&5
+configure: In function 'main':
+configure:1406: error: '__MINGW32__' undeclared (first use in this function)
+configure:1406: error: (Each undeclared identifier is reported only once
+configure:1406: error: for each function it appears in.)
+configure: failed program was:
+#line 1403 "configure"
+#include "confdefs.h"
+
+int main() {
+return __MINGW32__;
+; return 0; }
+configure:1427: checking how to run the C preprocessor
+configure:1448: gcc -E  conftest.c >/dev/null 2>conftest.out
+configure:1582: checking host system type
+configure:1603: checking build system type
+configure:1632: checking for ld used by GCC
+configure:1700: checking if the linker (/usr/bin/ld) is GNU ld
+GNU ld version 2.20.51.0.2-5.44.el6 20100205
+configure:1717: checking for /usr/bin/ld option to reload object files
+configure:1729: checking for BSD-compatible nm
+configure:1767: checking for a sed that does not truncate output
+configure:1851: checking whether ln -s works
+configure:1872: checking how to recognise dependent libraries
+configure:2058: checking for object suffix
+configure:2064: gcc -c -g -O2  conftest.c 1>&5
+configure:2084: checking for executable suffix
+configure:2094: gcc -o conftest -g -O2   conftest.c  1>&5
+configure:2125: checking command to parse /usr/bin/nm -B output
+configure:2208: gcc -c -g -O2  conftest.c 1>&5
+configure:2211: /usr/bin/nm -B conftest.o | sed -n -e 's/^.*[ ]\([ABCDGISTW][ABCDGISTW]*\)[ ][ ]*\(\)\([_A-Za-z][_A-Za-z0-9]*\)$/\1 \2\3 \3/p' > conftest.nm
+configure:2262: gcc -o conftest -g -O2   conftest.c conftstm.o 1>&5
+configure:2311: checking for dlfcn.h
+configure:2321: gcc -E  conftest.c >/dev/null 2>conftest.out
+configure:2357: checking for file
+configure:2490: checking for ranlib
+configure:2557: checking for strip
+configure:3072: checking for objdir
+configure:3099: checking for gcc option to produce PIC
+configure:3247: checking if gcc PIC flag -fPIC works
+configure:3261: gcc -c -g -O2 -fPIC -DPIC  conftest.c 1>&5
+configure:3313: checking if gcc static flag -static works
+configure:3328: gcc -o conftest -g -O2   -static conftest.c  1>&5
+/usr/bin/ld: cannot find -lc
+collect2: ld returned 1 exit status
+configure: failed program was:
+#line 3321 "configure"
+#include "confdefs.h"
+
+int main() {
+
+; return 0; }
+configure:3355: checking if gcc supports -c -o file.o
+configure:3374: gcc -c -g -O2 -o out/conftest2.o  conftest.c 1>&5
+configure:3403: checking if gcc supports -c -o file.lo
+configure:3421: gcc -c -g -O2 -c -o conftest.lo  conftest.c 1>&5
+configure:3471: checking if gcc supports -fno-rtti -fno-exceptions
+configure:3484: gcc -c -g -O2 -fno-rtti -fno-exceptions -c conftest.c  conftest.c 1>&5
+cc1: warning: command line option "-fno-rtti" is valid for C++/ObjC++ but not for C
+cc1: warning: command line option "-fno-rtti" is valid for C++/ObjC++ but not for C
+configure:3511: checking whether the linker (/usr/bin/ld) supports shared libraries
+configure:4210: checking how to hardcode library paths into programs
+configure:4238: checking whether stripping libraries is possible
+configure:4252: checking dynamic linker characteristics
+configure:4663: checking if libtool supports shared libraries
+configure:4667: checking whether to build shared libraries
+configure:4690: checking whether to build static libraries
+configure:5226: checking whether -lc should be explicitly linked in
+configure:5233: gcc -c -g -O2  conftest.c 1>&5
+configure:5246: gcc -shared conftest.o  -v -Wl,-soname -Wl,conftest -o conftest 2>&1 | grep  -lc  >/dev/null 2>&1
+configure:5833: checking for ANSI C header files
+configure:5846: gcc -E  conftest.c >/dev/null 2>conftest.out
+configure:5913: gcc -o conftest -g -O2   conftest.c  1>&5
+configure: In function 'main':
+configure:5908: warning: incompatible implicit declaration of built-in function 'exit'
+configure:5941: checking for dirent.h that defines DIR
+configure:5954: gcc -c -g -O2  conftest.c 1>&5
+configure:5979: checking for opendir in -ldir
+configure:5998: gcc -o conftest -g -O2   conftest.c -ldir   1>&5
+/usr/bin/ld: cannot find -ldir
+collect2: ld returned 1 exit status
+configure: failed program was:
+#line 5987 "configure"
+#include "confdefs.h"
+/* Override any gcc2 internal prototype to avoid an error.  */
+/* We use char because int might match the return type of a gcc2
+    builtin and then its argument prototype would still apply.  */
+char opendir();
+
+int main() {
+opendir()
+; return 0; }
+configure:6062: checking whether gcc supports assert without backlinking
+configure:6151: checking which extension is used for shared libraries
+configure:6175: checking which variable specifies run-time library path
+configure:6192: checking for the default library search path
+configure:6220: checking for objdir
+configure:6247: checking whether libtool supports -dlopen/-dlpreopen
+configure:6271: checking for shl_load
+configure:6299: gcc -o conftest -g -O2   conftest.c  1>&5
+/tmp/cc1l5PXj.o: In function `main':
+/data/lnmp/lib/libmcrypt-2.5.8/libltdl/configure:6293: undefined reference to `shl_load'
+collect2: ld returned 1 exit status
+configure: failed program was:
+#line 6276 "configure"
+#include "confdefs.h"
+/* System header to define __stub macros and hopefully few prototypes,
+    which can conflict with char shl_load(); below.  */
+#include <assert.h>
+/* Override any gcc2 internal prototype to avoid an error.  */
+/* We use char because int might match the return type of a gcc2
+    builtin and then its argument prototype would still apply.  */
+char shl_load();
+
+int main() {
+
+/* The GNU C library defines this for functions which it implements
+    to always fail with ENOSYS.  Some functions are actually named
+    something starting with __ and the normal name is an alias.  */
+#if defined (__stub_shl_load) || defined (__stub___shl_load)
+choke me
+#else
+shl_load();
+#endif
+
+; return 0; }
+configure:6320: checking for shl_load in -ldld
+configure:6339: gcc -o conftest -g -O2   conftest.c -ldld   1>&5
+/usr/bin/ld: cannot find -ldld
+collect2: ld returned 1 exit status
+configure: failed program was:
+#line 6328 "configure"
+#include "confdefs.h"
+/* Override any gcc2 internal prototype to avoid an error.  */
+/* We use char because int might match the return type of a gcc2
+    builtin and then its argument prototype would still apply.  */
+char shl_load();
+
+int main() {
+shl_load()
+; return 0; }
+configure:6362: checking for dlopen in -ldl
+configure:6381: gcc -o conftest -g -O2   conftest.c -ldl   1>&5
+configure:6533: checking for dlerror
+configure:6561: gcc -o conftest -g -O2   conftest.c  -ldl 1>&5
+configure:6589: checking for _ prefix in compiled symbols
+configure:6598: gcc -c -g -O2  conftest.c 1>&5
+configure:6601: /usr/bin/nm -B conftest.o | sed -n -e 's/^.*[ ]\([ABCDGISTW][ABCDGISTW]*\)[ ][ ]*\(\)\([_A-Za-z][_A-Za-z0-9]*\)$/\1 \2\3 \3/p' > conftest.nm
+configure:6735: checking whether deplibs are loaded by dlopen
+configure:6773: checking for argz.h
+configure:6783: gcc -E  conftest.c >/dev/null 2>conftest.out
+configure:6811: checking for error_t
+configure:6828: gcc -o conftest -g -O2   conftest.c  1>&5
+configure:6853: checking for argz_append
+configure:6881: gcc -o conftest -g -O2   conftest.c  1>&5
+configure:6853: checking for argz_create_sep
+configure:6881: gcc -o conftest -g -O2   conftest.c  1>&5
+configure:6853: checking for argz_insert
+configure:6881: gcc -o conftest -g -O2   conftest.c  1>&5
+configure:6853: checking for argz_next
+configure:6881: gcc -o conftest -g -O2   conftest.c  1>&5
+configure:6853: checking for argz_stringify
+configure:6881: gcc -o conftest -g -O2   conftest.c  1>&5
+configure:6929: checking for errno.h
+configure:6939: gcc -E  conftest.c >/dev/null 2>conftest.out
+configure:6929: checking for malloc.h
+configure:6939: gcc -E  conftest.c >/dev/null 2>conftest.out
+configure:6929: checking for memory.h
+configure:6939: gcc -E  conftest.c >/dev/null 2>conftest.out
+configure:6929: checking for stdlib.h
+configure:6939: gcc -E  conftest.c >/dev/null 2>conftest.out
+configure:6929: checking for stdio.h
+configure:6939: gcc -E  conftest.c >/dev/null 2>conftest.out
+configure:6929: checking for ctype.h
+configure:6939: gcc -E  conftest.c >/dev/null 2>conftest.out
+configure:6929: checking for unistd.h
+configure:6939: gcc -E  conftest.c >/dev/null 2>conftest.out
+configure:6969: checking for dl.h
+configure:6979: gcc -E  conftest.c >/dev/null 2>conftest.out
+configure:6975:16: error: dl.h: No such file or directory
+configure: failed program was:
+#line 6974 "configure"
+#include "confdefs.h"
+#include <dl.h>
+configure:6969: checking for sys/dl.h
+configure:6979: gcc -E  conftest.c >/dev/null 2>conftest.out
+configure:6975:20: error: sys/dl.h: No such file or directory
+configure: failed program was:
+#line 6974 "configure"
+#include "confdefs.h"
+#include <sys/dl.h>
+configure:6969: checking for dld.h
+configure:6979: gcc -E  conftest.c >/dev/null 2>conftest.out
+configure:6975:17: error: dld.h: No such file or directory
+configure: failed program was:
+#line 6974 "configure"
+#include "confdefs.h"
+#include <dld.h>
+configure:7009: checking for string.h
+configure:7019: gcc -E  conftest.c >/dev/null 2>conftest.out
+configure:7049: checking for strchr
+configure:7077: gcc -o conftest -g -O2   conftest.c  1>&5
+configure:7061: warning: conflicting types for built-in function 'strchr'
+configure:7104: checking for strrchr
+configure:7132: gcc -o conftest -g -O2   conftest.c  1>&5
+configure:7116: warning: conflicting types for built-in function 'strrchr'
+configure:7159: checking for memcpy
+configure:7187: gcc -o conftest -g -O2   conftest.c  1>&5
+configure:7171: warning: conflicting types for built-in function 'memcpy'
+configure:7214: checking for memmove
+configure:7242: gcc -o conftest -g -O2   conftest.c  1>&5
+configure:7226: warning: conflicting types for built-in function 'memmove'
+configure:7214: checking for strcmp
+configure:7242: gcc -o conftest -g -O2   conftest.c  1>&5
+configure:7226: warning: conflicting types for built-in function 'strcmp'

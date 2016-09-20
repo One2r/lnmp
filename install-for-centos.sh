@@ -35,6 +35,8 @@ sed -i 's:exclude=.*:exclude=:g' /etc/yum.conf
 for packages in patch make cmake gcc gcc-c++ gcc-g77 flex bison file libtool libtool-libs autoconf kernel-devel libjpeg libjpeg-devel libpng libpng-devel libpng10 libpng10-devel gd gd-devel freetype freetype-devel libxml2 libxml2-devel zlib zlib-devel glib2 glib2-devel bzip2 bzip2-devel libevent libevent-devel ncurses ncurses-devel curl curl-devel e2fsprogs e2fsprogs-devel krb5 krb5-devel libidn libidn-devel openssl openssl-devel vim-minimal nano fonts-chinese gettext gettext-devel ncurses-devel gmp-devel pspell-devel unzip libcap lrzsz screen rsync;
 do yum -y install $packages; done
 
+cd lib/
+
 tar zxvf libiconv-1.14.tar.gz
 cd libiconv-1.14/
 ./configure
@@ -101,6 +103,8 @@ fi
 
 ldconfig
 
+cd ..
+
 #内核参数调整
 cat >>/etc/security/limits.conf<<eof
 * soft nproc 65535
@@ -113,19 +117,15 @@ cat >>/etc/sysctl.conf<<eof
 fs.file-max=65535
 eof
 
-###移除系统自带la(n)mp包
-rpm -qa|grep httpd
-rpm -e httpd
+###移除系统自带lnmp包
 rpm -qa|grep mysql
 rpm -e mysql
 rpm -qa|grep php
 rpm -e php
-###删除系统默认安装la(n)mp
-yum -y remove httpd*
+###删除系统默认安装lnmp
 yum -y remove php*
 yum -y remove mysql-server mysql
 yum -y remove php-mysql
-yum -y remove httpd
 
 echo "============================2.安装lnmp=================================="
 PHP_VERSION=5.6.25
