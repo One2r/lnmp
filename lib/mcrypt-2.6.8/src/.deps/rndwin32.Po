@@ -1,3 +1,0 @@
-rndwin32.o: rndwin32.c ../config.h
-
-../config.h:
