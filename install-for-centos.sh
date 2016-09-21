@@ -4,6 +4,8 @@ echo "============================1.安装前相关工作=======================
 PATH=/bin:/sbin:/usr/bin:/usr/sbin:/usr/local/bin:/usr/local/sbin:~/bin
 export PATH
 
+. lnmp.conf
+
 echo 'LANG="en_US.UTF-8"' > /etc/sysconfig/i18n
 
 ###设置dns
@@ -128,9 +130,6 @@ yum -y remove mysql-server mysql
 yum -y remove php-mysql
 
 echo "============================2.安装lnmp=================================="
-PHP_VERSION=5.6.25
-NGINX_VERSION=1.10.1
-MARIADB_VERSION=10.0
 
 echo "==========MariaDB=========="
 cat >>/etc/yum.repos.d/MariaDB.repo<<eof
