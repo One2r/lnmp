@@ -5,6 +5,7 @@ PATH=/bin:/sbin:/usr/bin:/usr/sbin:/usr/local/bin:/usr/local/sbin:~/bin
 export PATH
 
 . lnmp.conf
+. main.sh
 
 echo 'LANG="en_US.UTF-8"' > /etc/sysconfig/i18n
 
@@ -34,7 +35,7 @@ cp /etc/yum.conf /etc/yum.conf.lnmp
 sed -i 's:exclude=.*:exclude=:g' /etc/yum.conf
 
 ###安装相关lib
-for packages in patch make cmake gcc gcc-c++ gcc-g77 flex bison file libtool libtool-libs autoconf kernel-devel libjpeg libjpeg-devel libpng libpng-devel libpng10 libpng10-devel gd gd-devel freetype freetype-devel libxml2 libxml2-devel zlib zlib-devel glib2 glib2-devel bzip2 bzip2-devel libevent libevent-devel ncurses ncurses-devel curl curl-devel e2fsprogs e2fsprogs-devel krb5 krb5-devel libidn libidn-devel openssl openssl-devel vim-minimal nano fonts-chinese gettext gettext-devel ncurses-devel gmp-devel pspell-devel unzip libcap lrzsz screen rsync;
+for packages in patch wget  make cmake gcc gcc-c++ gcc-g77 flex bison file libtool libtool-libs autoconf kernel-devel libjpeg libjpeg-devel libpng libpng-devel libpng10 libpng10-devel gd gd-devel freetype freetype-devel libxml2 libxml2-devel zlib zlib-devel glib2 glib2-devel bzip2 bzip2-devel libevent libevent-devel ncurses ncurses-devel curl curl-devel e2fsprogs e2fsprogs-devel krb5 krb5-devel libidn libidn-devel openssl openssl-devel vim-minimal nano fonts-chinese gettext gettext-devel ncurses-devel gmp-devel pspell-devel unzip libcap lrzsz screen rsync;
 do yum -y install $packages; done
 
 cd lib/
@@ -131,7 +132,7 @@ yum -y remove php-mysql
 
 echo "============================2.安装lnmp=================================="
 
-echo "==========MariaDB=========="
+echo "==========MariaDB ${MARIADB_VERSION}=========="
 cat >>/etc/yum.repos.d/MariaDB.repo<<eof
 # MariaDB ${MARIADB_VERSION} CentOS repository list - created $(date)
 # http://mariadb.org/mariadb/repositories/ 
@@ -152,8 +153,8 @@ mysqladmin -u root password 'root'
 
 echo "==========MariaDB install completed=========="
 
-echo "==========PHP=========="
-
+echo "==========PHP ${PHP_VERSION}=========="
+Download_Files ${Download_Mirror}/web/php/php-${PHP_VERSION}.tar.gz php-${PHP_VERSION}.tar.gz
 tar zxvf php-${PHP_VERSION}.tar.gz
 cd php-${PHP_VERSION}/
 ./configure  \
@@ -211,10 +212,10 @@ cp php.ini-production /usr/local/php-${PHP_VERSION}/etc/php.ini
 mv /usr/local/php-${PHP_VERSION}/etc/php-fpm.conf.default /usr/local/php-${PHP_VERSION}/etc/php-fpm.conf
 
 cd ..
-
 echo "==========PHP install completed=========="
 
-echo "==========Nginx=========="
+echo "==========Nginx ${NGINX_VERSION}=========="
+Download_Files ${Download_Mirror}/web/nginx/nginx-${NGINX_VERSION}.tar.gz nginx-${NGINX_VERSION}.tar.gz
 tar zxvf nginx-${NGINX_VERSION}.tar.gz
 cd nginx-${NGINX_VERSION}/
 ./configure --prefix=/usr/local/nginx-${NGINX_VERSION}
