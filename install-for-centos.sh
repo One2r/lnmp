@@ -38,6 +38,8 @@ sed -i 's:exclude=.*:exclude=:g' /etc/yum.conf
 for packages in patch wget  make cmake gcc gcc-c++ gcc-g77 flex bison file libtool libtool-libs autoconf kernel-devel libjpeg libjpeg-devel libpng libpng-devel libpng10 libpng10-devel gd gd-devel freetype freetype-devel libxml2 libxml2-devel zlib zlib-devel glib2 glib2-devel bzip2 bzip2-devel libevent libevent-devel ncurses ncurses-devel curl curl-devel e2fsprogs e2fsprogs-devel krb5 krb5-devel libidn libidn-devel openssl openssl-devel vim-minimal nano fonts-chinese gettext gettext-devel ncurses-devel gmp-devel pspell-devel unzip libcap lrzsz screen rsync;
 do yum -y install $packages; done
 
+Check_Download
+
 cd lib/
 
 tar zxvf libiconv-1.14.tar.gz
@@ -154,7 +156,6 @@ mysqladmin -u root password 'root'
 echo "==========MariaDB install completed=========="
 
 echo "==========PHP ${PHP_VERSION}=========="
-Download_Files ${Download_Mirror}/web/php/php-${PHP_VERSION}.tar.gz php-${PHP_VERSION}.tar.gz
 tar zxvf php-${PHP_VERSION}.tar.gz
 cd php-${PHP_VERSION}/
 ./configure  \
@@ -215,7 +216,6 @@ cd ..
 echo "==========PHP install completed=========="
 
 echo "==========Nginx ${NGINX_VERSION}=========="
-Download_Files ${Download_Mirror}/web/nginx/nginx-${NGINX_VERSION}.tar.gz nginx-${NGINX_VERSION}.tar.gz
 tar zxvf nginx-${NGINX_VERSION}.tar.gz
 cd nginx-${NGINX_VERSION}/
 ./configure --prefix=/usr/local/nginx-${NGINX_VERSION}
