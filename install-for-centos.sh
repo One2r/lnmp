@@ -42,14 +42,14 @@ Check_Download
 
 cd lib/
 
-tar zxvf libiconv-1.14.tar.gz
-cd libiconv-1.14/
+tar zxvf libiconv-${LIBICONV_VERSION}.tar.gz
+cd libiconv-${LIBICONV_VERSION}/
 ./configure
 make && make install
 cd ../
 
-tar zxvf libmcrypt-2.5.8.tar.gz
-cd libmcrypt-2.5.8/
+tar zxvf libmcrypt-${LIBMCRYPT_VERSION}.tar.gz
+cd libmcrypt-${LIBMCRYPT_VERSION}/
 ./configure
 make && make install
 /sbin/ldconfig
@@ -58,14 +58,14 @@ cd libltdl/
 make && make install
 cd ../../
 
-tar zxvf mhash-0.9.9.9.tar.gz
-cd mhash-0.9.9.9/
+tar zxvf mhash-${MHASH_VERSION}.tar.gz
+cd mhash-${MHASH_VERSION}/
 ./configure
 make && make install
 cd ../
 
-tar zxvf pcre-8.33.tar.gz
-cd pcre-8.33/
+tar zxvf pcre-${PCRE_VERSION}.tar.gz
+cd pcre-${PCRE_VERSION}/
 ./configure
 make && make install
 cd ../
@@ -82,8 +82,8 @@ ln -s /usr/local/lib/libmhash.so.2.0.1 /usr/lib/libmhash.so.2.0.1
 
 ldconfig
 
-tar zxvf mcrypt-2.6.8.tar.gz
-cd mcrypt-2.6.8/
+tar zxvf mcrypt-${MCRYPT_VERSION}.tar.gz
+cd mcrypt-${MCRYPT_VERSION}/
 ./configure
 make && make install
 cd ../
