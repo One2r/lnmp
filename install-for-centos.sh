@@ -240,3 +240,4 @@ chmod 0777 /data/logs -R
 
 #开机启动服务
 echo "ntpdate -u pool.ntp.org" >> /etc/rc.local
+chmod +x /etc/rc.local
