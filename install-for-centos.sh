@@ -1,6 +1,6 @@
 #!/bin/bash
 echo "============================1.安装前相关工作=================================="
-
+WORKSPACE=`pwd`
 PATH=/bin:/sbin:/usr/bin:/usr/sbin:/usr/local/bin:/usr/local/sbin:~/bin
 export PATH
 
@@ -8,12 +8,6 @@ export PATH
 . main.sh
 
 echo 'LANG="en_US.UTF-8"' > /etc/sysconfig/i18n
-
-###设置dns
-#cat >>/etc/resolv.conf<<eof
-#nameserver 222.246.129.80
-#nameserver 59.51.78.210
-#eof
 
 ###设置时区
 rm -rf /etc/localtime
@@ -35,58 +29,10 @@ cp /etc/yum.conf /etc/yum.conf.lnmp
 sed -i 's:exclude=.*:exclude=:g' /etc/yum.conf
 
 ###安装相关lib
-for packages in patch wget  make cmake gcc gcc-c++ gcc-g77 flex bison file libtool libtool-libs autoconf kernel-devel libjpeg libjpeg-devel libpng libpng-devel libpng10 libpng10-devel gd gd-devel freetype freetype-devel libxml2 libxml2-devel zlib zlib-devel glib2 glib2-devel bzip2 bzip2-devel libevent libevent-devel ncurses ncurses-devel curl curl-devel e2fsprogs e2fsprogs-devel krb5 krb5-devel libidn libidn-devel openssl openssl-devel vim-minimal nano fonts-chinese gettext gettext-devel ncurses-devel gmp-devel pspell-devel unzip libcap lrzsz screen rsync;
+for packages in epel-release vim wget make cmake gcc gcc-c++ flex bison file libtool libtool-libs kernel-devel libjpeg libjpeg-devel libpng libpng-devel gd gd-devel freetype freetype-devel libxml2 libxml2-devel zlib zlib-devel glib2 glib2-devel bzip2 bzip2-devel libevent libevent-devel curl curl-devel e2fsprogs e2fsprogs-devel libidn-devel openssl openssl-devel gettext gettext-devel gmp-devel libcap lrzsz ncurses ncurses-devel ntp net-tools systemd-devel;
 do yum -y install $packages; done
 
 Check_Download
-
-cd lib/
-
-tar zxvf libiconv-${LIBICONV_VERSION}.tar.gz
-cd libiconv-${LIBICONV_VERSION}/
-./configure
-make && make install
-cd ../
-
-tar zxvf libmcrypt-${LIBMCRYPT_VERSION}.tar.gz
-cd libmcrypt-${LIBMCRYPT_VERSION}/
-./configure
-make && make install
-/sbin/ldconfig
-cd libltdl/
-./configure --enable-ltdl-install
-make && make install
-cd ../../
-
-tar zxvf mhash-${MHASH_VERSION}.tar.gz
-cd mhash-${MHASH_VERSION}/
-./configure
-make && make install
-cd ../
-
-tar zxvf pcre-${PCRE_VERSION}.tar.gz
-cd pcre-${PCRE_VERSION}/
-./configure
-make && make install
-cd ../
-
-ln -s /usr/local/lib/libmcrypt.la /usr/lib/libmcrypt.la
-ln -s /usr/local/lib/libmcrypt.so /usr/lib/libmcrypt.so
-ln -s /usr/local/lib/libmcrypt.so.4 /usr/lib/libmcrypt.so.4
-ln -s /usr/local/lib/libmcrypt.so.4.4.8 /usr/lib/libmcrypt.so.4.4.8
-ln -s /usr/local/lib/libmhash.a /usr/lib/libmhash.a
-ln -s /usr/local/lib/libmhash.la /usr/lib/libmhash.la
-ln -s /usr/local/lib/libmhash.so /usr/lib/libmhash.so
-ln -s /usr/local/lib/libmhash.so.2 /usr/lib/libmhash.so.2
-ln -s /usr/local/lib/libmhash.so.2.0.1 /usr/lib/libmhash.so.2.0.1
-
-ldconfig
-
-tar zxvf mcrypt-${MCRYPT_VERSION}.tar.gz
-cd mcrypt-${MCRYPT_VERSION}/
-./configure
-make && make install
-cd ../
 
 ulimit -v unlimited
 
@@ -107,8 +53,6 @@ if [ ! `grep -l '/usr/local/lib'    '/etc/ld.so.conf'` ]; then
 fi
 
 ldconfig
-
-cd ..
 
 #内核参数调整
 cat >>/etc/security/limits.conf<<eof
@@ -156,13 +100,14 @@ mysqladmin -u root password 'root'
 echo "==========MariaDB install completed=========="
 
 echo "==========PHP ${PHP_VERSION}=========="
-tar zxvf php-${PHP_VERSION}.tar.gz
+cd ${WORKSPACE}
+tar -zxvf php-${PHP_VERSION}.tar.gz
 cd php-${PHP_VERSION}/
 ./configure  \
 --prefix=/usr/local/php-${PHP_VERSION} \
 --with-config-file-path=/usr/local/php-${PHP_VERSION}/etc \
 --enable-fpm \
---with-mysql=mysqlnd \
+--with-fpm-systemd \
 --with-mysqli=mysqlnd \
 --with-pdo-mysql=mysqlnd \
 --with-iconv-dir \
@@ -180,7 +125,6 @@ cd php-${PHP_VERSION}/
 --with-curl \
 --enable-mbregex \
 --enable-mbstring \
---with-mcrypt \
 --enable-ftp \
 --with-gd \
 --enable-gd-native-ttf \
@@ -196,7 +140,7 @@ cd php-${PHP_VERSION}/
 --disable-fileinfo \
 --enable-opcache
 
-make ZEND_EXTRA_LIBS='-liconv'
+make -j2
 make install
 
 rm -f /usr/bin/php
@@ -210,23 +154,58 @@ ln -s /usr/local/php/bin/php-config /usr/bin/php-config
 
 mkdir -p /usr/local/php-${PHP_VERSION}/etc
 cp php.ini-production /usr/local/php-${PHP_VERSION}/etc/php.ini
-mv /usr/local/php-${PHP_VERSION}/etc/php-fpm.conf.default /usr/local/php-${PHP_VERSION}/etc/php-fpm.conf
+cp /usr/local/php-${PHP_VERSION}/etc/php-fpm.conf.default /usr/local/php-${PHP_VERSION}/etc/php-fpm.conf
+cp /usr/local/php-${PHP_VERSION}/etc/php-fpm.d/www.conf.default /usr/local/php-${PHP_VERSION}/etc/php-fpm.d/www.conf
 
+cp ./sapi/fpm/php-fpm.service /usr/lib/systemd/system/
+systemctl enable php-fpm
+systemctl start php-fpm
 cd ..
+
+cp composer.phar /usr/local/bin/composer && chmod +x /usr/local/bin/composer
+cp cachetool.phar /usr/local/bin/cachetool && chmod +x /usr/local/bin/cachetool
 echo "==========PHP install completed=========="
 
-echo "==========Nginx ${NGINX_VERSION}=========="
-tar zxvf nginx-${NGINX_VERSION}.tar.gz
-cd nginx-${NGINX_VERSION}/
-./configure --prefix=/usr/local/nginx-${NGINX_VERSION}
+echo "==========openresty ${OPENRESTY_VERSION}=========="
+cd ${WORKSPACE}
+tar -zxvf openresty-${OPENRESTY_VERSION}.tar.gz
+cd openresty-${OPENRESTY_VERSION}/
+./configure --prefix=/usr/local/openresty-${OPENRESTY_VERSION} \
+--with-luajit \
+--with-stream \
+--with-stream_ssl_module \
+--with-http_sub_module \
+--with-http_stub_status_module \
+--with-threads \
+--with-openssl
 
-make && make install
-rm -f /usr/bin/nginx
-ln -s /usr/local/nginx-${NGINX_VERSION} /usr/local/nginx
-ln -s /usr/local/nginx/sbin/nginx /usr/bin/nginx
+make -j2 && make install
+ln -s /usr/local/openresty-${OPENRESTY_VERSION} /usr/local/openresty
 
+/usr/local/openresty/bin/openresty
 cd .. 
-echo "==========Nginx install completed=========="
+echo "==========openresty install completed=========="
+
+echo "==========Redis ${REDIS_VERSION}=========="
+cd ${WORKSPACE}
+tar -zxvf redis-${REDIS_VERSION}.tar.gz
+mv /usr/local/redis-${REDIS_VERSION} && cd /usr/local/redis-${REDIS_VERSION}
+make -j2 && make install
+
+REDIS_PORT=6379 \
+REDIS_CONFIG_FILE=/etc/redis/6379.conf \
+REDIS_LOG_FILE=/var/log/redis_6379.log \
+REDIS_DATA_DIR=/var/lib/redis/6379 \
+REDIS_EXECUTABLE=`command -v redis-server` ./utils/install_server.sh
+echo "==========Redis install completed=========="
+
+echo "==========tmux ${TMUX_VERSION}=========="
+cd ${WORKSPACE}
+tar -xzvf tmux-${TMUX_VERSION}.tar.gz
+cd tmux-${TMUX_VERSION}
+./configure
+make && make install
+echo "==========tmux install completed=========="
 
 echo "============================3.安装后相关工作=================================="
 
