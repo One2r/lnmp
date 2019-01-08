@@ -20,5 +20,5 @@ Check_Download()
     Download_Files http://gordalina.github.io/cachetool/downloads/cachetool.phar cachetool.phar
     Download_Files https://openresty.org/download/openresty-${OPENRESTY_VERSION}.tar.gz openresty-${OPENRESTY_VERSION}.tar.gz
     Download_Files http://download.redis.io/releases/redis-${REDIS_VERSION}.tar.gz redis-${REDIS_VERSION}.tar.gz
-		Download_Files https://github.com/tmux/tmux/releases/download/${TMUX_VERSION}/tmux-${TMUX_VERSION}.tar.gz tmux-${TMUX_VERSION}.tar.gz
+    Download_Files https://github.com/tmux/tmux/releases/download/${TMUX_VERSION}/tmux-${TMUX_VERSION}.tar.gz tmux-${TMUX_VERSION}.tar.gz
 }
