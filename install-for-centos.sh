@@ -188,8 +188,8 @@ echo "==========openresty install completed=========="
 
 echo "==========Redis ${REDIS_VERSION}=========="
 cd ${WORKSPACE}
-tar -zxvf redis-${REDIS_VERSION}.tar.gz
-mv redis-${REDIS_VERSION} && cd /usr/local/redis-${REDIS_VERSION}
+tar -zxvf redis-${REDIS_VERSION}.tar.gz -C /usr/local/
+cd /usr/local/redis-${REDIS_VERSION}
 make -j2 && make install
 
 REDIS_PORT=6379 \
