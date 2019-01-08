@@ -176,8 +176,7 @@ cd openresty-${OPENRESTY_VERSION}/
 --with-stream_ssl_module \
 --with-http_sub_module \
 --with-http_stub_status_module \
---with-threads \
---with-openssl
+--with-threads
 
 make -j2 && make install
 ln -s /usr/local/openresty-${OPENRESTY_VERSION} /usr/local/openresty
