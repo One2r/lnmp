@@ -84,7 +84,7 @@ cat >>/etc/yum.repos.d/MariaDB.repo<<eof
 # http://mariadb.org/mariadb/repositories/ 
 [mariadb] 
 name = MariaDB 
-baseurl = http://yum.mariadb.org/${MARIADB_VERSION}/centos6-amd64 
+baseurl = http://yum.mariadb.org/${MARIADB_VERSION}/centos7-amd64
 gpgkey=https://yum.mariadb.org/RPM-GPG-KEY-MariaDB 
 gpgcheck=1
 eof
